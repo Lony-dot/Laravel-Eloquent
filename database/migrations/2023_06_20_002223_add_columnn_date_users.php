@@ -13,7 +13,7 @@ class AddColumnnDateUsers extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('postagens', function (Blueprint $table) {
             $table->date('date')->after('body')->default();
         });
     }
