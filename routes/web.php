@@ -6,7 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/accessor', function () {
+    $post = Post::first();
 
+    return $post->title_and_body;
+
+});
+
+Route::get('/delete', function () {
+    $post = Post::where('id', 1)->first();
+
+    if(!$post)
+        return 'Post Not Found';
+    dd($post->delete());
+
+});
 
 Route::get('/update', function(Request $request) {
     if (!$post = Post::find(1))
