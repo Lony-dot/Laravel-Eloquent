@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/accessor', function () {
     $post = Post::first();
 
-    return $post->title_and_body;
-
+    return $post;
 });
 
 //Não perde efetivamente o registro, apenas oculta ele, consegue visualizar no BD;
