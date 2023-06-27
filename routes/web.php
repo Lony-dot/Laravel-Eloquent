@@ -13,6 +13,15 @@ Route::get('/accessor', function () {
 
 });
 
+//Não perde efetivamente o registro, apenas oculta ele, consegue visualizar no BD;
+Route::get('/delete2', function () {
+    Post::destroy(13);
+
+    $posts = Post::get();
+
+    return $posts;
+});
+
 Route::get('/delete', function () {
     $post = Post::where('id', 1)->first();
 
