@@ -6,6 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/mutators', function () {
+    $user = User::first();
+    $post = Post::create([
+        'user_id' => $user->id,
+        'title' => 'Um novo título ' . Str::random(10),
+        'body' => Str::random(100),
+        'date' => now(),
+    ]);
+
+    return $post;
+});
+
 Route::get('/accessor', function () {
     $post = Post::first();
 

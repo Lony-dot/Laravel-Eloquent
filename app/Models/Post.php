@@ -14,10 +14,10 @@ class Post extends Model
 
     protected $fillable = ['user_id', 'title', 'body', 'date'];
 
-    // protected $casts = [
-    //     'date' => 'date',
-    //     'active' => 'boolean'
-    // ];
+     protected $casts = [
+         'date' => 'datetime:d/m/Y',
+         'active' => 'boolean'
+     ];
 
     // protected $table = 'postagens';
     // protected $primaryKey = 'id_postagem';
@@ -43,9 +43,14 @@ class Post extends Model
     //     return $this->title . ' - ' . $this->body;
     //  }
 
-     public function getDateAttribute($value)
-     {
-        return Carbon::make($value)->format('Y/m/d');
-     }
+    //  public function getDateAttribute($value)
+    //  {
+    //     return Carbon::make($value)->format('Y/m/d');
+    //  }
+
+    public function setDateAttribute($value)
+    {
+        $this->attributes['date'] = Carbon::make($value)->format('Y-m-d');
+    }
 
 }
