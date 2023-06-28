@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Date;
 
 class Post extends Model
 {
@@ -18,6 +19,26 @@ class Post extends Model
          'date' => 'datetime:d/m/Y',
          'active' => 'boolean'
      ];
+
+     public function scopeLastWeek($query)
+     {
+        return $this->whereDate('date', '>=', now()->subDays(4))
+                    ->whereDate('date', '<=', now()->subDays(1));
+     }
+
+     public function scopeToday($query)
+     {
+        return $this->whereDate('date', now());
+     }
+
+     public function scopeBetween($query, $firstDate, $lastDate)
+     {
+        $firstDate = Carbon::make($firstDate)->format('Y-m-d');
+        $lastDate  = Carbon::make($lastDate)->format('Y-m-d');
+        return $this->whereDate('date', '>=', $firstDate)
+                    ->whereDate('date', '<=', $lastDate);
+     }
+
 
     // protected $table = 'postagens';
     // protected $primaryKey = 'id_postagem';

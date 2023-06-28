@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/local-scope', function () {
+   // $posts = Post::lastWeek()->get();
+   // $posts = Post::today()->get();
+   $posts = Post::between('2023-06-23', '2023-06-27')->get();
+
+    return $posts;
+});
+
 Route::get('/mutators', function () {
     $user = User::first();
     $post = Post::create([
