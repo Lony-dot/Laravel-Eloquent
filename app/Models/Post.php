@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Accessors\DefaultAccessors;
+use App\Scopes\YearScope;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +21,14 @@ class Post extends Model
          'date' => 'datetime:d/m/Y',
          'active' => 'boolean'
      ];
+
+     protected static function booted()
+     {
+        // static::addGlobalScope('year', function (Builder $builder) {
+        //     $builder->whereYear('date', now()->year);
+        // });
+        static::addGlobalScope(new YearScope);
+     }
 
      public function scopeLastWeek($query)
      {
